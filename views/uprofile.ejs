@@ -1,0 +1,433 @@
+
+
+<%- include ("uheader.ejs") %>
+<%- include ("unavbar.ejs") %>
+
+<style>
+   .tab-content {
+    display: block;
+}
+/* .tab-content>.tab-pane {
+    display: block;
+}
+.fade:not(.show) {
+    opacity: 1 !important;
+} */
+</style>
+
+      <!-- Main Content -->
+      <div class="main-content">
+       <section class="section">
+           <div class="fully-page">
+             <div class="full-headings">
+               <h4>User Profiles</h4>
+             </div>
+             <div class="box-bodys">
+              <div id="successMessage" class="alert alert-success d-none">
+                Profile picture updated successfully!
+              </div>
+                
+                <div id="errorMessage" class="alert alert-danger d-none">
+                Error updating profile picture. Please try again.
+                </div>
+            <div class="row profile-boxes">
+                <div class="col-md-12">
+                 <div class="cards-head">
+                  <h2 class="section-title">Hi, <%- user_data.firstname %></h2>
+                  <p class="section-lead">
+                    Change information about yourself on this page.
+                  </p>
+           </div>
+                </div>
+              
+                  
+              <div class="col-12 col-md-12 col-lg-4">
+             <div class="card">
+
+            
+                <div class="profile-pic  mt-3">
+                  <label class="-label" for="file">
+                    <span class="glyphicon glyphicon-camera"></span>
+                    <!-- <span>Change Image</span> -->
+                  </label>
+                  <input id="file" type="file" onchange="loadFile(event)"/>
+                  <!-- <img src="http://<%= host %>/uploads/<%- user_data.image %>" id="output" alt="Change" width="200" /> -->
+                  <img src="/images/user_14251527.gif" id="output" alt="Change" width="200" alt="Image">
+                 </div>
+
+                 <div class="contact_inner mt-3 text-center">
+                  <h3><%- user_data.user_name %> </h3>
+                  <p><strong>About: </strong>User of Spectrum Sport </p>
+                  <ul class="list-unstyled">
+                     <li><i class="fa fa-envelope-o"></i> : <%- user_data.email  %></li>
+                     <li><i class="fa fa-phone"></i> :  <%- user_data.contact  %></li>
+                  </ul>
+               </div>
+
+<!-- 
+                <div class=" profile-widget">
+     
+                 
+                  <div class="profile-widget-description">
+                    <div class="profile-widget-name">Ujang Maman <div class="text-muted d-inline font-weight-normal"><div class="slash"></div> Web Developer</div></div>
+                    Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a fictional character but an original hero in my family,<br> a hero for his children and for his wife. So, I use the name as a user in this template. Not a tribute, I'm just bored with 'John Doe' John Doe'</b>.
+                      <div class="full-btnss">
+                    <div class="card-footer text-left">
+                      <button class="btn btn-primary">Message</button>
+                       <button class="btn btn-primary">Edit</button>
+                    </div>
+                  </div>
+                  </div>
+                 
+                </div> -->
+               
+              </div>
+
+</div>
+
+
+              
+
+
+              <div class="col-12 col-md-12 col-lg-8">
+                <div class="card-forms profile-widget">
+
+
+
+                  <div class="tab_style2">
+                     <div class="tabbar">
+                        <nav>
+                           <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#profile_section" role="tab" aria-selected="true">Profile</a>
+
+                              <!-- <a class="nav-item nav-link" id="nav-activity-tab" data-toggle="tab" href="#recent_activity" role="tab" aria-selected="false"> recent_activity</a> -->
+
+                              <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#password_section" role="tab" aria-selected="false">Password</a>
+
+                           </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                           <% if (output === ' Profile Updated Successfully !!' || output === 'Password changed successfully') { %>
+                              <p class="success-text mt-2 mb-0"><%= output %></p>
+                           <% } else { %>
+                              <p class="error-text mt-2 mb-0"><%= output %></p>
+                           <% } %>
+             
+                           <div class="tab-pane mt-0 fade show active" id="profile_section" role="tabpanel" aria-labelledby="nav-home-tab">
+                          
+                              <div class="card mt-0">
+                                 <div class="card-body">
+                                    <h5 class="card-title d-flex justify-content-between">
+                                       <span>Personal Details</span> 
+                                       <a class="edit-link" data-toggle="modal" href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>Edit</a>
+                                    </h5>
+                                    <div class="row">
+                                       <p class="col-sm-3 text-muted text-sm-left mb-0 mb-sm-3">User Name </p>
+                                       <p class="col-sm-9"><%- user_data.user_name %></p>
+                                    </div>
+                                    <div class="row">
+                                       <p class="col-sm-3 text-muted text-sm-left mb-0 mb-sm-3">Date of birthday </p>
+                                       <p class="col-sm-9"><%- user_data.birthday_date %></p>
+                                    </div>
+
+                                   
+                             
+                                    <div class="row">
+                                       <p class="col-sm-3 text-muted text-sm-left mb-0 mb-sm-3">Email ID</p>
+                                       <p class="col-sm-9"> <%- user_data.email %> </p>
+                                    </div>
+                                    <div class="row">
+                                       <p class="col-sm-3 text-muted text-sm-left mb-0 mb-sm-3">Mobile</p>
+                                       <p class="col-sm-9"><%- user_data.contact %></p>
+                                    </div>
+                                    <div class="row">
+                                       <p class="col-sm-3 text-muted text-sm-left mb-0 mb-sm-3">disability</p>
+                                       <p class="col-sm-9"><%- user_data.disability %></p>
+                                    </div>
+                                    <div class="row">
+                                       <p class="col-sm-3 text-muted text-sm-left mb-0">Address</p>
+                                       <p class="col-sm-9 mb-0"> <%- user_data.address %></p>
+                                    </div>
+                                    <div class="row">
+                                       <p class="col-sm-3 text-muted text-sm-left mb-0 mb-sm-3">State </p>
+                                       <p class="col-sm-9"><%- user_data.state %></p>
+                                    </div>
+
+                                 </div>
+                              </div>
+                                       
+
+                         </div>
+
+                       
+                           <div class="tab-pane fade" id="password_section" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+                           <div class="card">
+                              <div class="card-body">
+                                 <h5 class="card-title">Change Password</h5>
+                                 <div class="row">
+                                    <div class="col-md-10 col-lg-6">
+                                       <form method="post" action="/admin/changepass">
+                                          <div class="form-group">
+                                             <label>Old Password</label>
+                                             <input name="opass" type="password" class="form-control">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>New Password</label>
+                                             <input name="npass" type="password" class="form-control">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Confirm Password</label>
+                                             <input name="cpass" type="password" class="form-control">
+                                          </div>
+                                          <button class="btn btn-primary" type="submit" style="width: 40%;">Save Changes</button>
+                                       </form>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>                                    
+                         
+                        </div>
+                        
+                        </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+                   </div>
+                 </div>
+             </section>
+
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+         Copyright by 
+         <a href="https://cyberimpulses.com/"> ciss </a>
+        </div>
+        <div class="footer-right">
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!-- General JS Scripts -->
+  <script src="../assets/js/app.min.js"></script>
+  <!-- JS Libraies -->
+  <script src="../assets/bundles/apexcharts/apexcharts.min.js"></script>
+  <!-- Page Specific JS File -->
+  <script src="../assets/js/page/index.js"></script>
+  <!-- Template JS File -->
+  <script src="../assets/js/scripts.js"></script>
+  <!-- Custom JS File -->
+  <script src="../assets/js/custom.js"></script>
+    <script src="../assets/js/text-editor.js"></script>
+
+
+
+   
+</body>
+
+
+<!-- index  21 Nov 2019 03:47:04 GMT -->
+</html>
+
+
+
+<script>
+
+  var loadFile = function (event) {
+    var image = document.getElementById("output");
+    var file = event.target.files[0];
+  
+    // Create a FormData object to send the file
+    var formData = new FormData();
+    formData.append("image", file); // Use the name "profileImage" to match your server's expectations
+
+    // Send the AJAX request
+    $.ajax({
+      url: "/admin/updateadminpic", // Replace with your actual API endpoint URL
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+      if(response.msg == 'success'){
+        $("#successMessage").removeClass("d-none");
+    $("#errorMessage").addClass("d-none");
+      }else{
+        $("#errorMessage").removeClass("d-none");
+    $("#successMessage").addClass("d-none");
+      }
+  
+      },
+      error: function (error) {
+         
+          $("#errorMessage").removeClass("d-none");
+    $("#successMessage").addClass("d-none");
+      },
+    });
+  
+    // Update the preview image
+    image.src = URL.createObjectURL(file);
+  };
+  
+
+
+
+  $(document).ready(function () {
+    $('.nav-tabs a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+  });
+
+  
+  
+  </script>
+
+
+
+
+
+              <!-- Edit Details Modal -->
+                                      
+              <div class="modal fade" id="edit_personal_details" aria-hidden="true" role="dialog">
+               <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title">Personal Details</h5>
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">×</span>
+                        </button> -->
+                     </div>
+                     <div class="modal-body">
+                        <form method="post" action="/admin/profile" enctype="multipart/form-data" >
+                           <div class="row form-row">
+                              <div class="col-12 col-sm-6">
+                                 <div class="form-group">
+                                    <label> user name </label>
+                                    <input name="user_name" type="text" class="form-control" value="<%- user_data.user_name %>">
+                                 </div>
+                              </div>
+                             
+                  
+                            
+                              <div class="col-12 col-sm-6">
+                                 <div class="form-group">
+                                    <label>Login Email </label>
+                                    <input name="email" type="email" class="form-control" value="<%- user_data.email %>">
+                                 </div>
+                              </div>
+                              <div class="col-12 col-sm-6">
+                                 <div class="form-group">
+                                    <label>Disability</label>
+                                    <select name="disability" class="form-control">
+                                        <option value="">Select your disability</option>
+                                       
+                                        <option value="on" <% if(user_data.disability=='on'){ %> Selected <% } %>>On</option>
+                                        <option value="off" <% if(user_data.disability=='Off'){ %> Selected <% } %>>Off</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              
+                              <div class="col-12 col-sm-6">
+                                 <div class="form-group">
+                                    <label>Mobile</label>
+                                    <input name="contact"  type="text" value="<%- user_data.contact %>"class="form-control">
+                                 </div>
+                              </div>
+             
+
+                           
+
+                           <!-- <div class="col-12">
+                              <div class="form-group">
+                              <label>About</label>
+                                 <input name="about"  type="text" class="form-control" value="<%- user_data.about %>">
+                              </div>
+                           </div> -->
+
+                                  
+
+                              <div class="col-12 col-sm-6">
+                                 <div class="form-group">
+                                 <label>Address</label>
+                                    <input name="address"  type="text" class="form-control" value="<%- user_data.address %>">
+                                 </div>
+                              </div>
+
+                              
+                                 <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                    <label>Document</label>
+                                    <input  type="file"  class="form-control"  id="avatar" name="image" accept="image/png, image/jpeg" />
+                                 </div>
+                              </div>
+
+                              <div class="col-12 col-sm-6">
+                                 <div class="form-group">
+                                    <label>State of Residence</label>
+                                  <select name="state" class="form-control">
+                                      <option value="" >Select your state</option>
+                                      <option value="andhra_pradesh" <% if(user_data.state=="andhra_pradesh"){ %> selected <%  } %> >Andhra Pradesh</option>
+                                      <option value="arunachal_pradesh" <% if(user_data.state=="arunachal_pradesh"){ %> selected <%  } %> >Arunachal Pradesh</option>
+                                      <option value="assam" <% if(user_data.state=="assam"){ %> selected <%  } %> >Assam</option>
+                                      <option value="bihar" <% if(user_data.state=="bihar"){ %> selected <%  } %> >Bihar</option>
+                                      <option value="chhattisgarh" <% if(user_data.state=="chhattisgarh"){ %> selected <%  } %> >Chhattisgarh</option>
+                                      <option value="goa" <% if(user_data.state=="goa"){ %> selected <%  } %> >Goa</option>
+                                      <option value="gujarat" <% if(user_data.state=="gujarat"){ %> selected <%  } %> >Gujarat</option>
+                                      <option value="haryana" <% if(user_data.state=="haryanaharyana"){ %> selected <%  } %> >Haryana</option>
+                                      <option value="himachal_pradesh" <% if(user_data.state=="himachal_pradesh"){ %> selected <%  } %> >Himachal Pradesh</option>
+                                      <option value="jharkhand" <% if(user_data.state=="jharkhand"){ %> selected <%  } %> >Jharkhand</option>
+                                      <option value="karnataka" <% if(user_data.state=="karnataka"){ %> selected <%  } %> >Karnataka</option>
+                                      <option value="kerala" <% if(user_data.state=="kerala"){ %> selected <%  } %> >Kerala</option>
+                                      <option value="madhya_pradesh" <% if(user_data.state=="madhya_pradesh"){ %> selected <%  } %> >Madhya Pradesh</option>
+                                      <option value="maharashtra" <% if(user_data.state==""){ %> selected <%  } %> >Maharashtra</option>
+                                      <option value="manipur" <% if(user_data.state=="manipur"){ %> selected <%  } %> >Manipur</option>
+                                      <option value="meghalaya" <% if(user_data.state=="meghalaya"){ %> selected <%  } %> >Meghalaya</option>
+                                      <option value="mizoram" <% if(user_data.state=="mizoram"){ %> selected <%  } %> >Mizoram</option>
+                                      <option value="nagaland" <% if(user_data.state=="nagaland"){ %> selected <%  } %> >Nagaland</option>
+                                      <option value="odisha" <% if(user_data.state=="odisha"){ %> selected <%  } %> >Odisha</option>
+                                      <option value="punjab" <% if(user_data.state=="punjab"){ %> selected <%  } %> >Punjab</option>
+                                      <option value="rajasthan" <% if(user_data.state=="rajasthan"){ %> selected <%  } %> >Rajasthan</option>
+                                      <option value="sikkim" <% if(user_data.state=="sikkim"){ %> selected <%  } %> >Sikkim</option>
+                                      <option value="tamil_nadu" <% if(user_data.state=="tamil_nadu"){ %> selected <%  } %> >Tamil Nadu</option>
+                                      <option value="telangana" <% if(user_data.state=="telangana"){ %> selected <%  } %> >Telangana</option>
+                                      <option value="tripura" <% if(user_data.state=="tripura"){ %> selected <%  } %> >Tripura</option>
+                                      <option value="uttar_pradesh" <% if(user_data.state=="uttar_pradesh"){ %> selected <%  } %> >Uttar Pradesh</option>
+                                      <option value="uttarakhand" <% if(user_data.state=="uttarakhand"){ %> selected <%  } %> >Uttarakhand</option>
+                                      <option value="west_bengal" <% if(user_data.state=="west_bengal"){ %> selected <%  } %> >West Bengal</option>
+                                  </select></div>
+                              </div>
+                              
+                              
+                           <div class="col-md-6 col-12">
+                              <div class="form-group">
+                              
+                                 <img alt="image" src="/uploads/<%-user_data.document %>"
+                                  style="width: 100px !important;">
+                           </div>
+                        </div>
+                           <br>
+                           <div class="col-md-12 col-12" style="text-align: center;">
+                              <button type="submit" class="btn btn-primary">Save Changes</button>
+                              <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="closeEmailModal()">Close</button>
+                           </div>
+                           
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- /Edit Details Modal -->
+
+
+            <script>
+                 function closeEmailModal() {
+    window.location.href = '/admin/profile'; 
+  }
+
+  </script>
